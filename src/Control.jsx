@@ -1,0 +1,75 @@
+import React, { useEffect, useState, useRef } from "react";
+import { fetchSheet } from "./api/sheets";
+import { SOUND_URLS } from "./sounds";
+import { Howl } from "howler";
+
+const SHEET_ID = "1P05Uw_P7rfapZcO0KLz5wAa1Rjnp6h5XmK3yOGSnZLo";
+
+export default function Control() {
+  const [rows, setRows] = useState([]);
+  const eventSounds = useRef({});
+
+  useEffect(()=>{
+    refresh();
+    // instantiate event sounds
+    eventSounds.current = {
+      attack: new Howl({ src: [SOUND_URLS.event_attack], loop: true, volume: 0.8, html5: true }),
+      betrayal: new Howl({ src: [SOUND_URLS.event_betrayal], loop: true, volume: 0.8, html5: true }),
+      duel: new Howl({ src: [SOUND_URLS.event_duel], loop: true, volume: 0.8, html5: true }),
+      skypiea: new Howl({ src: [SOUND_URLS.event_skypiea], loop: true, volume: 0.8, html5: true }),
+      berries: new Howl({ src: [SOUND_URLS.event_berries], loop: true, volume: 0.8, html5: true }),
+      fruit: new Howl({ src: [SOUND_URLS.event_fruit], loop: true, volume: 0.8, html5: true })
+    };
+  }, []);
+
+  async function refresh() {
+    const data = await fetchSheet(SHEET_ID, 0);
+    setRows(data);
+  }
+
+  function toggleEvent(name) {
+    const s = eventSounds.current[name];
+    if (!s) return;
+    if (s.playing()) s.stop(); else s.play();
+  }
+
+  return (
+    <div style={{padding:20, color:"#fff", background:"#0b2b3a", minHeight:"100vh"}}>
+      <h2>CONTROL - Grand Line War</h2>
+      <button onClick={refresh}>🔄 Aggiorna da Google Sheets</button>
+
+      <table style={{width:"100%", marginTop:10, borderCollapse:"collapse"}}>
+        <thead>
+          <tr><th align="left">Nome</th><th align="left">Pirata</th><th align="left">Punti</th></tr>
+        </thead>
+        <tbody>
+          {rows.map((r, i) => {
+            const name = r.Nome || r.Name || r.nome || Object.values(r)[0];
+            const pirate = r.Pirata || r.pirata || "";
+            const pointsKey = Object.keys(r).find(k => k.toLowerCase().includes("punt")) || Object.keys(r)[2];
+            const pts = Number(r[pointsKey] || 0);
+            return (
+              <tr key={i} style={{borderBottom:"1px solid rgba(255,255,255,0.1)"}}>
+                <td>{name}</td>
+                <td>{pirate}</td>
+                <td>{pts}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+
+      <h3 style={{marginTop:24}}>Eventi speciali (toggle ON/OFF)</h3>
+      <div style={{display:"flex", flexWrap:"wrap", gap:8}}>
+        <button onClick={()=>toggleEvent("attack")}>🪖 Attacco</button>
+        <button onClick={()=>toggleEvent("betrayal")}>🗡️ Tradimento</button>
+        <button onClick={()=>toggleEvent("duel")}>⚔️ Duello</button>
+        <button onClick={()=>toggleEvent("skypiea")}>💎 Skypiea</button>
+        <button onClick={()=>toggleEvent("berries")}>💰 Berries</button>
+        <button onClick={()=>toggleEvent("fruit")}>🍇 Frutto</button>
+      </div>
+
+      <p style={{opacity:0.8, marginTop:16}}>Suggerimento: lascia il pannello aperto durante la live per avviare/fermare le colonne sonore degli eventi ogni 48 pack.</p>
+    </div>
+  );
+}

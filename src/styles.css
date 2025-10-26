@@ -1,0 +1,29 @@
+* { box-sizing: border-box; }
+body { margin:0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background:#0b2b3a; color:#fff; }
+.app { display:flex; height:100vh; overflow:hidden; }
+.left-panel { width:360px; background: linear-gradient(#0f3040, #0b2430); padding:16px; box-sizing:border-box; border-right: 2px solid rgba(255,255,255,0.06); }
+.left-panel h1 { margin:0 0 8px 0; font-size:22px; letter-spacing: 1px; }
+.leaderboard { margin-top:12px; overflow:auto; max-height:72vh; }
+.leader-row { display:flex; align-items:center; gap:8px; padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.06); }
+.leader-name { flex:1; font-weight:700; }
+.leader-points { width:48px; text-align:right; font-variant-numeric: tabular-nums; }
+.leader-bar { width:100%; background:rgba(255,255,255,0.06); height:6px; border-radius:6px; overflow:hidden; margin-left:8px; }
+.leader-bar > div { height:100%; background:linear-gradient(90deg,#ffd166,#ffa600); width:0; transition:width 700ms ease; }
+
+.race-area { flex:1; position:relative; overflow:hidden; }
+.sea-bg { position:relative; width:100%; height:100%; background-image: url('/assets/map_texture.svg'); background-size:cover; }
+.island { position:absolute; right:20px; bottom:30px; width:260px; opacity:0.98; transform:translateZ(0); filter: drop-shadow(0 6px 12px rgba(0,0,0,0.4)); }
+.ships { position:absolute; left:0; right:300px; top:20px; bottom:20px; display:flex; flex-direction:column; gap:10px; padding:20px; }
+
+.ship-row { display:flex; align-items:center; gap:8px; }
+.ship-label { width:200px; min-width:160px; color:#fff; }
+.ship-name { font-weight:800; }
+.ship-pirate { font-size:12px; opacity:0.8; }
+.ship-track { flex:1; position:relative; height:36px; background:linear-gradient(180deg, rgba(0,0,0,0.2), transparent); border-radius:10px; }
+.ship { position:absolute; left:0; top:50%; transform:translateY(-50%); transition: transform 1.2s cubic-bezier(.2,.9,.2,1); display:flex; align-items:center; gap:6px; padding:4px 6px; border:2px solid #fff; border-radius:10px; background:rgba(0,0,0,0.35); backdrop-filter: blur(2px); }
+.ship .ship-flag { width:22px; height:16px; border-radius:2px; }
+.ship .ship-body { width:44px; height:12px; background:linear-gradient(90deg,#6b3,#3b6); border-radius:4px; }
+.ship.winner { box-shadow: 0 0 18px 6px rgba(255,215,0,0.35); transform:scale(1.05) translateY(-50%); }
+
+.controls-bottom { position:absolute; bottom:16px; left:16px; right:16px; }
+.finish-btn { width:100%; padding:12px 14px; background:#ffb703; border:none; color:#000; border-radius:10px; font-weight:800; cursor:pointer; font-size:16px; }

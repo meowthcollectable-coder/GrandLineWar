@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="384" viewBox="0 0 512 384">
+  <defs>
+    <radialGradient id="gold" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#ffd166"/>
+      <stop offset="100%" stop-color="#ffb703"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="384" fill="none"/>
+  <!-- island -->
+  <ellipse cx="380" cy="300" rx="110" ry="28" fill="#0ea5a5" opacity="0.4"/>
+  <ellipse cx="360" cy="270" rx="140" ry="40" fill="#c2b280"/>
+  <ellipse cx="360" cy="260" rx="120" ry="30" fill="#d9c28b"/>
+  <!-- palms -->
+  <rect x="330" y="190" width="10" height="70" fill="#7c4d1e"/>
+  <rect x="355" y="200" width="8" height="60" fill="#7c4d1e"/>
+  <path d="M340 190 C320 170, 300 170, 285 185 C315 182, 325 195, 340 190" fill="#2dd4bf"/>
+  <path d="M340 190 C360 170, 380 170, 395 185 C365 182, 355 195, 340 190" fill="#2dd4bf"/>
+  <path d="M359 200 C339 185, 325 185, 315 195 C336 195, 349 205, 359 200" fill="#22c55e"/>
+  <path d="M359 200 C379 185, 395 185, 405 195 C386 195, 369 205, 359 200" fill="#22c55e"/>
+  <!-- chest -->
+  <rect x="330" y="240" width="40" height="25" rx="4" fill="url(#gold)" stroke="#7c4d1e" stroke-width="3"/>
+  <line x1="350" y1="240" x2="350" y2="265" stroke="#7c4d1e" stroke-width="3"/>
+  <!-- X mark -->
+  <g transform="translate(450,210) rotate(15)">
+    <rect x="-25" y="-3" width="50" height="6" fill="#ef4444"/>
+    <rect x="-3" y="-25" width="6" height="50" fill="#ef4444"/>
+  </g>
+</svg>
